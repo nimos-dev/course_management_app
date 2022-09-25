@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../providers/login_state.dart';
 import '../constants/constants.dart';
+import '../widgets/custom_text_field_widget.dart';
 
 class SignInScreen extends ConsumerWidget {
   const SignInScreen({Key? key}) : super(key: key);
@@ -19,26 +20,8 @@ class SignInScreen extends ConsumerWidget {
             padding: EdgeInsets.all(8.0),
             child: Text('Sign In'),
           )),
-          const Padding(
-            padding: EdgeInsets.fromLTRB(32, 8, 32, 8),
-            child: TextField(
-              obscureText: true,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'E-mail',
-              ),
-            ),
-          ),
-          const Padding(
-            padding: EdgeInsets.fromLTRB(32, 8, 32, 8),
-            child: TextField(
-              obscureText: true,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Password',
-              ),
-            ),
-          ),
+          const CustomTextFieldWidget(labelText: 'E-mail', obscureText: false),
+          const CustomTextFieldWidget(labelText: 'Password', obscureText: true),
           Center(
             child: TextButton(
               onPressed: () {

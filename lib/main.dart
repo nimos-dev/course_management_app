@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 
+import 'app_theme/app_theme_data.dart';
 import 'app_theme/app_theme_state.dart';
 import 'router/app_router.dart';
 
@@ -29,18 +30,10 @@ class _MySchoolAppState extends ConsumerState<MySchoolApp> {
       debugShowCheckedModeBanner: false,
       title: 'My schoolapp',
       themeMode: appThemeState.isDarkModeEnabled ? ThemeMode.dark : ThemeMode.light,
-      theme: ThemeData(
-        brightness: Brightness.light,
-        primarySwatch: Colors.grey,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      darkTheme: ThemeData(
-        primaryColor: Colors.black,
-        backgroundColor: const Color(0xFF212121),
-        brightness: Brightness.dark,
-        primarySwatch: Colors.grey,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
+      theme: appThemeState.isHighContrastEnabled ? highContrastlightTheme() : lightTheme(),
+      highContrastTheme: highContrastlightTheme(),
+      darkTheme: appThemeState.isHighContrastEnabled ? highContrastDarkTheme() : darkTheme(),
+      highContrastDarkTheme: highContrastDarkTheme(),
       routeInformationProvider: appRouter.router.routeInformationProvider,
       routeInformationParser: appRouter.router.routeInformationParser,
       routerDelegate: appRouter.router.routerDelegate,

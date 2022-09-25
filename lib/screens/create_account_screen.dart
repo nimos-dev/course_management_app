@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../constants/constants.dart';
 import '../providers/login_state.dart';
+import '../widgets/custom_text_field_widget.dart';
 
 class CreateAccountScreen extends ConsumerWidget {
   const CreateAccountScreen({Key? key}) : super(key: key);
@@ -14,27 +15,13 @@ class CreateAccountScreen extends ConsumerWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Center(child: Text('Create new account')),
-          const Padding(
-            padding: EdgeInsets.fromLTRB(32, 8, 32, 8),
-            child: TextField(
-              obscureText: true,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'E-mail',
-              ),
-            ),
-          ),
-          const Padding(
-            padding: EdgeInsets.fromLTRB(32, 8, 32, 8),
-            child: TextField(
-              obscureText: true,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Password',
-              ),
-            ),
-          ),
+          const Center(
+              child: Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Text('Create new account'),
+          )),
+          const CustomTextFieldWidget(labelText: 'E-mail', obscureText: false),
+          const CustomTextFieldWidget(labelText: 'Password', obscureText: true),
           Center(
             child: TextButton(
               onPressed: () {

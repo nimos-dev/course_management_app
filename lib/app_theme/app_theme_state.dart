@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 // TODO: Use Enum DarkModeHighContrast | DarkModeLowContrast | BrightModeHighContrast | BrightModeLowContrast
 
 class AppThemeState extends ChangeNotifier {
-  var isDarkModeEnabled = false;
+  var isDarkModeEnabled = true;
+  var isHighContrastEnabled = false;
 
   void setLightTheme() {
     isDarkModeEnabled = false;
@@ -13,6 +14,16 @@ class AppThemeState extends ChangeNotifier {
 
   void setDarkTheme() {
     isDarkModeEnabled = true;
+    notifyListeners();
+  }
+
+  void setHighContrastOn() {
+    isHighContrastEnabled = true;
+    notifyListeners();
+  }
+
+  void setHighContrastOff() {
+    isHighContrastEnabled = false;
     notifyListeners();
   }
 }

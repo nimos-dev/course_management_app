@@ -52,7 +52,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         elevation: 0,
         leading: const Icon(Icons.rocket_launch), // TODO: Make your own custom logo/icon
         title: const Text(
-          'Edu...',
+          'NanoCourse',
           style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: Colors.white),
         ),
       ),
