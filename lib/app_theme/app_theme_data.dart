@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+// TODO: Implement
+
 ThemeData lightTheme() {
   return ThemeData(
     brightness: Brightness.light,
@@ -8,14 +10,44 @@ ThemeData lightTheme() {
   );
 }
 
-// TODO: Only technical placeholder not implemented
 ThemeData highContrastlightTheme() {
   return ThemeData(
     brightness: Brightness.light,
     primarySwatch: Colors.grey,
     visualDensity: VisualDensity.adaptivePlatformDensity,
+    colorScheme: const ColorScheme.light().copyWith(
+      secondary: Colors.amber,
+      primary: Colors.grey,
+      onPrimary: Colors.white,
+    ),
+    appBarTheme: const AppBarTheme(backgroundColor: Colors.grey),
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+      selectedItemColor: Colors.amber,
+    ),
+    switchTheme: SwitchThemeData(
+      trackColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
+        if (states.contains(MaterialState.disabled)) {
+          return null;
+        }
+        if (states.contains(MaterialState.selected)) {
+          return Colors.grey;
+        }
+        return null;
+      }),
+      thumbColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
+        if (states.contains(MaterialState.disabled)) {
+          return null;
+        }
+        if (states.contains(MaterialState.selected)) {
+          return Colors.amber;
+        }
+        return null;
+      }),
+    ),
   );
 }
+
+// ----->
 
 ThemeData darkTheme() {
   return ThemeData(
@@ -24,11 +56,10 @@ ThemeData darkTheme() {
     brightness: Brightness.dark,
     primarySwatch: Colors.grey,
     visualDensity: VisualDensity.adaptivePlatformDensity,
-    appBarTheme: const AppBarTheme(backgroundColor: Color(0xFF212121)),
+    // appBarTheme: const AppBarTheme(backgroundColor: Color(0xFF212121)),
   );
 }
 
-// TODO: Only technical placeholder not implemented
 ThemeData highContrastDarkTheme() {
   return ThemeData(
     primaryColor: Colors.black,
@@ -41,7 +72,7 @@ ThemeData highContrastDarkTheme() {
       primary: Colors.grey,
       onPrimary: Colors.black,
     ),
-    appBarTheme: const AppBarTheme(backgroundColor: Color(0xFF212121)),
+    appBarTheme: const AppBarTheme(backgroundColor: Colors.white10),
     switchTheme: SwitchThemeData(
       trackColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
         if (states.contains(MaterialState.disabled)) {

@@ -2,19 +2,20 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 
-import '../providers/login_state.dart';
+import '../providers/app_service.dart';
 import '../constants/constants.dart';
 import '../screens/screens.dart';
 
 class AppRouter {
-  final LoginState loginState;
+  final AppService appService;
 
-  AppRouter(this.loginState);
+  AppRouter(this.appService);
 
   late final router = GoRouter(
-    refreshListenable: loginState,
-    debugLogDiagnostics: false,
+    refreshListenable: appService,
+    debugLogDiagnostics: true,
     urlPathStrategy: UrlPathStrategy.path,
+    initialLocation: rootRouteName,
     routes: [
       GoRoute(
         name: rootRouteName,
@@ -34,9 +35,28 @@ class AppRouter {
         path: '/create-account',
         pageBuilder: (context, state) => MaterialPage<void>(
           key: state.pageKey,
-          child: const CreateAccountScreen(),
+          child: CreateAccountScreen(),
         ),
       ),
+
+      GoRoute(
+        name: splashRouteName,
+        path: '/splash',
+        pageBuilder: (context, state) => MaterialPage<void>(
+          key: state.pageKey,
+          child: const SplashScreen(),
+        ),
+      ),
+
+      GoRoute(
+        name: onboardRouteName,
+        path: '/onboard-location',
+        pageBuilder: (context, state) => MaterialPage<void>(
+          key: state.pageKey,
+          child: const OnboardScreen(),
+        ),
+      ),
+
       GoRoute(
         name: homeRouteName,
         path: '/home/:tab(overview|courses|profile|settings)',
@@ -104,18 +124,52 @@ class AppRouter {
     // Sign In / Register Account redirect logic
 
     redirect: (state) {
-      final loginLoc = state.namedLocation(loginRouteName);
-      final loggingIn = state.subloc == loginLoc;
+      final loginLocation = state.namedLocation(loginRouteName);
+      final signupLocation = state.namedLocation(createAccountRouteName);
+      final rootLocation = state.namedLocation(rootRouteName);
+      final splashLocation = state.namedLocation(splashRouteName);
+      final onboardLocation = state.namedLocation(onboardRouteName);
+
+      final isLogedIn = appService.loginState;
+      final isInitialized = appService.initialized;
+      final isOnboarded = appService.onboarding;
+
+      final isGoingToLogin = state.subloc == loginLocation;
+      final isGoingToSignup = state.subloc == signupLocation;
+      final isGoingToInit = state.subloc == splashLocation;
+      final isGoingToOnboard = state.subloc == onboardLocation;
+
+      if (!isInitialized && !isGoingToInit) {
+        // print('splash Screen');
+        return splashLocation;
+      } else if (isInitialized && !isOnboarded && !isGoingToOnboard) {
+        // print('onboard screen');
+        return onboardLocation;
+      } else if (isInitialized && isOnboarded && !isLogedIn && !isGoingToLogin && !isGoingToSignup) {
+        // print('Login');
+        return loginLocation;
+      } else if ((isLogedIn && isGoingToLogin) ||
+          (isLogedIn && isGoingToSignup) ||
+          (isInitialized && isGoingToInit) ||
+          (isOnboarded && isGoingToOnboard)) {
+        // print('root');
+        return rootLocation;
+      } else {
+        return null;
+      }
+
+      /* final loggingIn = state.subloc == loginLocation;
       final createAccountLoc = state.namedLocation(createAccountRouteName);
       final creatingAccount = state.subloc == createAccountLoc;
-      final loggedIn = loginState.loggedIn;
+      final loggedIn = appService.loginState;
       final rootLoc = state.namedLocation(rootRouteName);
 
-      if (!loggedIn && !loggingIn && !creatingAccount) return loginLoc;
-      if (loggedIn && (loggingIn || creatingAccount)) return rootLoc;
-      return null;
+      if (!loggedIn && !loggingIn && !creatingAccount) return loginLocation;
+      if (loggedIn && (loggingIn || creatingAccount)) return rootLoc; */
+
+      // return null;
     },
   );
 }
 
-final appRouterProvider = Provider<AppRouter>((ref) => AppRouter(ref.read(loginStateProvider)));
+final appRouterProvider = Provider<AppRouter>((ref) => AppRouter(ref.read(appServiceProvider)));

@@ -7,3 +7,5 @@ export 'sign_in_screen.dart';
 export 'overview_screen.dart';
 export 'profile_screen.dart';
 export 'settings_screen.dart';
+export 'splash_screen.dart';
+export 'onboard_screen.dart';

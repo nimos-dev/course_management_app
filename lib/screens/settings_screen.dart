@@ -5,7 +5,7 @@ import '../app_theme/app_theme_state.dart';
 import '../app_theme/high_contrast_mode_switch.dart';
 import '../app_theme/dark_mode_switch.dart';
 import '../miscellaneous/not_implemented_dialog.dart';
-import '../providers/login_state.dart';
+import '../providers/app_service.dart';
 import '../widgets/language_dropdown_button_widget.dart';
 import '../widgets/settings_widget.dart';
 import '../widgets/custom_frame_widget.dart';
@@ -22,6 +22,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   Widget build(BuildContext context) {
     final appThemeState = ref.watch(appThemeStateNotifier);
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Column(
         children: [
           const SizedBox(height: 8),
@@ -39,12 +40,12 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               const SettingsWidget(
                 labelText: 'Enable high contrast mode',
                 prefixIcon: Icons.contrast,
-                sufix: HighContrastModeSwitch(), // TODO: Implement HighContrastModeSwitch()
+                sufix: HighContrastModeSwitch(),
               ),
               const SettingsWidget(
                 labelText: 'Language',
                 prefixIcon: Icons.language,
-                sufix: LanguageDropdownButton(), // TODO: Implement LanguageDropdownButton()
+                sufix: LanguageDropdownButton(),
               ),
             ],
           ),
@@ -55,6 +56,16 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             textLabel: 'Account',
             ref: ref,
             accountSettings: [
+              // -----> User display name
+              SettingsWidget(
+                labelText: 'Display name',
+                prefixIcon: Icons.person,
+                sufix: IconButton(
+                  onPressed: () => openDialog(),
+                  // TODO: Implement 2FA
+                  icon: const Icon(Icons.arrow_forward_ios),
+                ),
+              ),
               // -----> Phone number
               SettingsWidget(
                 labelText: 'Phone number',
@@ -82,21 +93,12 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   icon: const Icon(Icons.arrow_forward_ios),
                 ),
               ),
-              // -----> Two-factor authentication
-              SettingsWidget(
-                labelText: 'Two-factor authentication',
-                prefixIcon: Icons.lock,
-                sufix: IconButton(
-                  onPressed: () => notImplementedDialog(context), // TODO: Implement 2FA
-                  icon: const Icon(Icons.arrow_forward_ios),
-                ),
-              ),
               // -----> Sign Out
               SettingsWidget(
                 labelText: 'Sign out',
                 prefixIcon: Icons.exit_to_app,
                 sufix: IconButton(
-                  onPressed: () => ref.read(loginStateProvider).testOut(),
+                  onPressed: () => ref.read(appServiceProvider).signOut(),
                   icon: const Icon(Icons.arrow_forward_ios),
                 ),
               ),
@@ -106,4 +108,34 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
       ),
     );
   }
+
+  TextEditingController myTextFieldController = TextEditingController();
+
+  Future openDialog() => showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          scrollable: true,
+          title: const Text('Change Display Name'),
+          content: TextField(
+            controller: myTextFieldController,
+            autofocus: true,
+            decoration: const InputDecoration(hintText: 'New name'),
+          ),
+          actions: [
+            TextButton(onPressed: () {}, child: const Text('OK')),
+            TextButton(
+                onPressed: () async {
+                  await ref
+                      .read(appServiceProvider)
+                      .userCredential
+                      ?.user
+                      ?.updateDisplayName(myTextFieldController.text);
+                  await ref.read(appServiceProvider).userCredential?.user?.reload();
+                  print(ref.read(appServiceProvider).userCredential?.user?.displayName);
+                  Navigator.pop(this.context);
+                },
+                child: const Text('Cancel'))
+          ],
+        ),
+      );
 }

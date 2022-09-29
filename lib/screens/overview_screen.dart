@@ -1,12 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../extensions/string_extension.dart';
+import '../extensions/app_localizations_context.dart';
+import '../providers/app_service.dart';
 
-class OverviewScreen extends StatelessWidget {
+class OverviewScreen extends ConsumerWidget {
   const OverviewScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(child: Text('My Overview...')),
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Scaffold(
+      body: Center(
+          child: Consumer(
+        builder: (BuildContext context, WidgetRef ref, Widget? child) => Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text('My Overview...'),
+            const SizedBox(height: 8),
+            Text('Active language: ${context.loc.language.capitalize()}'),
+            const SizedBox(height: 16),
+            const Text('Active User'),
+            const SizedBox(height: 8),
+            Text('User ID: ${ref.read(appServiceProvider).userCredential?.user?.uid}'),
+            const SizedBox(height: 8),
+            Text('User Name: ${ref.watch(appServiceProvider).userCredential?.user?.displayName}'),
+            const SizedBox(height: 8),
+            Text('User Email: ${ref.watch(appServiceProvider).userCredential?.user?.email}'),
+            const SizedBox(height: 8),
+            Text('User Phone number: ${ref.watch(appServiceProvider).userCredential?.user?.phoneNumber}'),
+          ],
+        ),
+      )),
     );
   }
 }
+
+/* 
+ */

@@ -1,51 +1,64 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
-import '../providers/login_state.dart';
 import '../constants/constants.dart';
+import '../providers/app_service.dart';
 import '../widgets/custom_text_field_widget.dart';
 
-class SignInScreen extends ConsumerWidget {
+class SignInScreen extends ConsumerStatefulWidget {
   const SignInScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<SignInScreen> createState() => _SignInScreenState();
+}
+
+class _SignInScreenState extends ConsumerState<SignInScreen> {
+  final GlobalKey<FormState> _formKey = GlobalKey();
+  final _email = TextEditingController();
+  final _password = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    //final auth = ref.watch(authenticationProvider);
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Center(
-              child: Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Text('Sign In'),
-          )),
-          const CustomTextFieldWidget(labelText: 'E-mail', obscureText: false),
-          const CustomTextFieldWidget(labelText: 'Password', obscureText: true),
-          Center(
-            child: TextButton(
-              onPressed: () {
-                ref.read(loginStateProvider).testIn();
-              },
-              child: const Text('OK'),
-            ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text('Don\'t have an account ?'),
-              TextButton(
+      body: Form(
+        key: _formKey,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Center(
+                child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text('Sign In'),
+            )),
+            CustomTextFieldWidget(labelText: 'E-mail', obscureText: false, textEditingController: _email),
+            CustomTextFieldWidget(labelText: 'Password', obscureText: true, textEditingController: _password),
+            Center(
+              child: TextButton(
                 onPressed: () {
-                  context.goNamed(createAccountRouteName);
+                  ref.read(appServiceProvider).signIn(_email.text, _password.text);
                 },
-                child: const Text(
-                  'Create new account !',
-                  style: TextStyle(color: Colors.orange),
-                ),
+                child: const Text('OK'),
               ),
-            ],
-          )
-        ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text('Don\'t have an account ?'),
+                TextButton(
+                  onPressed: () async {
+                    context.goNamed(createAccountRouteName);
+                  },
+                  child: const Text(
+                    'Create new account !',
+                    style: TextStyle(color: Colors.orange),
+                  ),
+                ),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }
