@@ -2,9 +2,16 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 
-import '../providers/app_service.dart';
-import '../constants/constants.dart';
-import '../screens/screens.dart';
+import '../app_features/app_authentication/app_service.dart';
+import '../app_features/app_authentication/create_account_screen.dart';
+import '../app_features/app_authentication/sign_in_screen.dart';
+import '../app_features/app_introduction/splash_screen.dart';
+import '../app_features/app_navigation/home_screen.dart';
+import '../app_features/app_onboarding/onboard_screen.dart';
+import '../app_features/user_courses/details_screen.dart';
+import '../common_screens/error_screen.dart';
+
+import 'constants.dart';
 
 class AppRouter {
   final AppService appService;

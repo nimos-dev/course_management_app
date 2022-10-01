@@ -2,7 +2,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 
-import 'screens.dart';
+import '../app_settings/settings_screen.dart';
+import '../user_courses/courses_screen.dart';
+import '../user_overview/overview_screen.dart';
+import '../user_profile/profile_screen.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   final int index;

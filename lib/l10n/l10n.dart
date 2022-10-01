@@ -8,7 +8,7 @@ class L10n {
     const Locale('es'), // Spanish
     const Locale('fr'), // French
     const Locale('it'), // Italian
-    const Locale('nb'), // Norwegian - Bokml
+    const Locale('nb'), // Norwegian - Bokmål
     const Locale('pt'), // Portuguese
     const Locale('sv'), // Swedish
   ];

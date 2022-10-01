@@ -7,11 +7,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'app_theme/app_theme_state.dart';
-import 'app_theme/app_theme_data.dart';
-
+import 'app_config/app_router.dart';
+import 'app_features/app_theme_selection/app_theme_data.dart';
+import 'app_features/app_theme_selection/app_theme_state.dart';
 import 'l10n/l10n_state.dart';
-import 'router/app_router.dart';
 import 'l10n/l10n.dart';
 
 Future<void> main() async {
@@ -24,8 +23,6 @@ Future<void> main() async {
     ),
   ], child: MySchoolApp(sharedPreferences: sharedPreferences)));
 }
-
-// final firebaseinitializerProvider = FutureProvider<FirebaseApp>((ref) async => await Firebase.initializeApp());
 
 final sharedPreferencesProvider = Provider<SharedPreferences>((ref) => throw UnimplementedError());
 
