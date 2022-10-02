@@ -1,8 +1,8 @@
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 
-import '../../app_config/constants.dart';
-import 'course_info_model.dart';
+import '../../../../../../app_config/constants.dart';
+import '../../domain/entities/course_info_model.dart';
 
 class CoursesScreen extends StatelessWidget {
   const CoursesScreen({Key? key}) : super(key: key);

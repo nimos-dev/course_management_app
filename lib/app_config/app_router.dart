@@ -3,12 +3,12 @@ import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 
 import '../app_features/app_authentication/app_service.dart';
-import '../app_features/app_authentication/create_account_screen.dart';
-import '../app_features/app_authentication/sign_in_screen.dart';
-import '../app_features/app_introduction/splash_screen.dart';
-import '../app_features/app_navigation/home_screen.dart';
-import '../app_features/app_onboarding/onboard_screen.dart';
-import '../app_features/user_courses/details_screen.dart';
+import '../app_features/app_authentication/presentation/screens/create_account_screen.dart';
+import '../app_features/app_authentication/presentation/screens/sign_in_screen.dart';
+import '../app_features/app_home/app_home_features/user_courses/presentation/screens/details_screen.dart';
+import '../app_features/app_home/presentation/screens/home_screen.dart';
+import '../app_features/app_introduction/presentation/screens/splash_screen.dart';
+import '../app_features/app_onboarding/presentation/screens/onboard_screen.dart';
 import '../common_screens/error_screen.dart';
 
 import 'constants.dart';

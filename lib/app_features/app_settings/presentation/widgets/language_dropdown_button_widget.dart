@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../l10n/l10n_state.dart';
+import '../../../../l10n/l10n_state.dart';
 
 class LanguageDropdownButton extends ConsumerStatefulWidget {
   const LanguageDropdownButton({Key? key}) : super(key: key);

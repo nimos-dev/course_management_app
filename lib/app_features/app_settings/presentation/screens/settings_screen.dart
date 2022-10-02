@@ -1,14 +1,16 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 
-import '../app_theme_selection/app_theme_state.dart';
-import '../app_theme_selection/dark_mode_switch.dart';
-import '../app_theme_selection/high_contrast_mode_switch.dart';
-import '../../common_widgets/not_implemented_dialog.dart';
-import '../app_authentication/app_service.dart';
-import 'language_dropdown_button_widget.dart';
-import 'settings_widget.dart';
-import 'custom_frame_widget.dart';
+import 'package:school_soft_project/app_features/app_settings/app_settings_features/app_theme/dark_mode_switch.dart';
+import 'package:school_soft_project/app_features/app_settings/app_settings_features/app_theme/high_contrast_mode_switch.dart';
+
+import '../../../../common_widgets/not_implemented_dialog.dart';
+import '../../../app_authentication/app_service.dart';
+
+import '../../app_settings_features/app_theme/app_theme_state.dart';
+import '../widgets/language_dropdown_button_widget.dart';
+import '../widgets/settings_widget.dart';
+import '../widgets/custom_frame_widget.dart';
 
 class SettingsScreen extends ConsumerStatefulWidget {
   const SettingsScreen({Key? key}) : super(key: key);

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../extensions/string_extension.dart';
-import '../../extensions/app_localizations_context.dart';
-import '../app_authentication/app_service.dart';
+import '../../../../../../extensions/string_extension.dart';
+import '../../../../../../extensions/app_localizations_context.dart';
+import '../../../../../app_authentication/app_service.dart';
 
 class OverviewScreen extends ConsumerWidget {
   const OverviewScreen({Key? key}) : super(key: key);
