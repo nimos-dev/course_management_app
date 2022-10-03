@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../app_authentication/app_service.dart';
+import '../../../app_authentication/app_authentication_providers.dart';
+import '../../../app_authentication/repositories/auth_repository.dart';
+import '../widgets/splash_progress_indicator.dart';
 
 class SplashScreen extends ConsumerStatefulWidget {
   const SplashScreen({super.key});
@@ -11,10 +13,10 @@ class SplashScreen extends ConsumerStatefulWidget {
 }
 
 class _SplashScreenState extends ConsumerState<SplashScreen> {
-  late AppService _appService;
+  late AuthRepository _appService;
   @override
   void initState() {
-    _appService = ref.read(appServiceProvider);
+    _appService = ref.read(authRepositoryProvider);
     onAppStartUp();
 
     super.initState();
@@ -24,17 +26,8 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
-            Text('School Soft Project'),
-            SizedBox(height: 20),
-            CircularProgressIndicator(),
-          ],
-        ),
-      ),
+    return const Scaffold(
+      body: SplashProgressIndicator(),
     );
   }
 }

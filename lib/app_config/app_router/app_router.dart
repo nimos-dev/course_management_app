@@ -1,20 +1,18 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 
-import '../app_features/app_authentication/app_service.dart';
-import '../app_features/app_authentication/presentation/screens/create_account_screen.dart';
-import '../app_features/app_authentication/presentation/screens/sign_in_screen.dart';
-import '../app_features/app_home/app_home_features/user_courses/presentation/screens/details_screen.dart';
-import '../app_features/app_home/presentation/screens/home_screen.dart';
-import '../app_features/app_introduction/presentation/screens/splash_screen.dart';
-import '../app_features/app_onboarding/presentation/screens/onboard_screen.dart';
-import '../common_screens/error_screen.dart';
-
-import 'constants.dart';
+import '../../app_features/app_authentication/repositories/auth_repository.dart';
+import '../../app_features/app_authentication/presentation/screens/create_account_screen.dart';
+import '../../app_features/app_authentication/presentation/screens/sign_in_screen.dart';
+import '../../app_features/app_home/app_home_features/user_courses/presentation/screens/details_screen.dart';
+import '../../app_features/app_home/presentation/screens/home_screen.dart';
+import '../../app_features/app_introduction/presentation/screens/splash_screen.dart';
+import '../../app_features/app_onboarding/presentation/screens/onboard_screen.dart';
+import '../../common_screens/error_screen.dart';
+import 'app_router_constants.dart';
 
 class AppRouter {
-  final AppService appService;
+  final AuthRepository appService;
 
   AppRouter(this.appService);
 
@@ -42,7 +40,7 @@ class AppRouter {
         path: '/create-account',
         pageBuilder: (context, state) => MaterialPage<void>(
           key: state.pageKey,
-          child: CreateAccountScreen(),
+          child: const CreateAccountScreen(),
         ),
       ),
 
@@ -164,19 +162,6 @@ class AppRouter {
       } else {
         return null;
       }
-
-      /* final loggingIn = state.subloc == loginLocation;
-      final createAccountLoc = state.namedLocation(createAccountRouteName);
-      final creatingAccount = state.subloc == createAccountLoc;
-      final loggedIn = appService.loginState;
-      final rootLoc = state.namedLocation(rootRouteName);
-
-      if (!loggedIn && !loggingIn && !creatingAccount) return loginLocation;
-      if (loggedIn && (loggingIn || creatingAccount)) return rootLoc; */
-
-      // return null;
     },
   );
 }
-
-final appRouterProvider = Provider<AppRouter>((ref) => AppRouter(ref.read(appServiceProvider)));

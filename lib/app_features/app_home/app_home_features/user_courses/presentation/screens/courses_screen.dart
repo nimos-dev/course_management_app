@@ -1,7 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../../app_config/constants.dart';
+import '../../../../../../app_config/app_router/app_router_constants.dart';
 import '../../domain/entities/course_info_model.dart';
 
 class CoursesScreen extends StatelessWidget {

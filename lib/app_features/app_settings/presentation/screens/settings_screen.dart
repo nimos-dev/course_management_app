@@ -5,7 +5,7 @@ import 'package:school_soft_project/app_features/app_settings/app_settings_featu
 import 'package:school_soft_project/app_features/app_settings/app_settings_features/app_theme/high_contrast_mode_switch.dart';
 
 import '../../../../common_widgets/not_implemented_dialog.dart';
-import '../../../app_authentication/app_service.dart';
+import '../../../app_authentication/app_authentication_providers.dart';
 
 import '../../app_settings_features/app_theme/app_theme_state.dart';
 import '../widgets/language_dropdown_button_widget.dart';
@@ -100,7 +100,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 labelText: 'Sign out',
                 prefixIcon: Icons.exit_to_app,
                 sufix: IconButton(
-                  onPressed: () => ref.read(appServiceProvider).signOut(),
+                  onPressed: () => ref.read(authRepositoryProvider).signOut(),
                   icon: const Icon(Icons.arrow_forward_ios),
                 ),
               ),
@@ -128,12 +128,12 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             TextButton(
                 onPressed: () async {
                   await ref
-                      .read(appServiceProvider)
+                      .read(authRepositoryProvider)
                       .userCredential
                       ?.user
                       ?.updateDisplayName(myTextFieldController.text);
-                  await ref.read(appServiceProvider).userCredential?.user?.reload();
-                  print(ref.read(appServiceProvider).userCredential?.user?.displayName);
+                  await ref.read(authRepositoryProvider).userCredential?.user?.reload();
+                  print(ref.read(authRepositoryProvider).userCredential?.user?.displayName);
                   Navigator.pop(this.context);
                 },
                 child: const Text('Cancel'))

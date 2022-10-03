@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../app_authentication/app_service.dart';
+import '../../../app_authentication/app_authentication_providers.dart';
 
 class OnboardScreen extends ConsumerWidget {
   const OnboardScreen({super.key});
@@ -16,7 +16,7 @@ class OnboardScreen extends ConsumerWidget {
           const Text('Onboard Screen!'),
           TextButton(
             onPressed: () {
-              ref.read(appServiceProvider).onboarding = true;
+              ref.read(authRepositoryProvider).onboarding = true;
             },
             child: const Text('Done!'),
           )

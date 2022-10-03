@@ -7,11 +7,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'app_config/app_router.dart';
+import 'app_config/app_config_provider.dart';
+
 import 'app_features/app_settings/app_settings_features/app_theme/app_theme_data.dart';
 import 'app_features/app_settings/app_settings_features/app_theme/app_theme_state.dart';
 
-import 'l10n/l10n_state.dart';
+import 'l10n/l10n_provider.dart';
 import 'l10n/l10n.dart';
 
 Future<void> main() async {

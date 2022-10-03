@@ -2,12 +2,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../app_config/constants.dart';
+import '../../../../app_config/app_router/app_router_constants.dart';
 import '../../../app_settings/presentation/widgets/custom_text_field_widget.dart';
-import '../../app_service.dart';
 
 class CreateAccountScreen extends ConsumerStatefulWidget {
-  CreateAccountScreen({Key? key}) : super(key: key);
+  const CreateAccountScreen({Key? key}) : super(key: key);
 
   @override
   ConsumerState<CreateAccountScreen> createState() => _CreateAccountScreenState();
@@ -38,7 +37,7 @@ class _CreateAccountScreenState extends ConsumerState<CreateAccountScreen> {
             Center(
               child: TextButton(
                 onPressed: () {
-                  ref.read(appServiceProvider).loginState = true;
+                  // TODO: Implement create account...
                 },
                 child: const Text('Create'),
               ),
@@ -62,14 +61,5 @@ class _CreateAccountScreenState extends ConsumerState<CreateAccountScreen> {
         ),
       ),
     );
-  }
-}
-
-class name extends StatelessWidget {
-  const name({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container();
   }
 }
