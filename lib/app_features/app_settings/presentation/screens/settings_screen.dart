@@ -63,7 +63,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 labelText: 'Display name',
                 prefixIcon: Icons.person,
                 sufix: IconButton(
-                  onPressed: () => openDialog(),
+                  onPressed: () => notImplementedDialog(context), // TODO: Implement switch Display name
                   // TODO: Implement 2FA
                   icon: const Icon(Icons.arrow_forward_ios),
                 ),
