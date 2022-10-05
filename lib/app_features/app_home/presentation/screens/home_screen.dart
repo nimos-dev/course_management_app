@@ -3,9 +3,9 @@ import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 
 import '../../../app_settings/presentation/screens/settings_screen.dart';
+import '../../../course_quiz/presentation/screens/course_quiz_screen.dart';
 import '../../app_home_features/user_courses/presentation/screens/courses_screen.dart';
 import '../../app_home_features/user_overview/presentation/screens/overview_screen.dart';
-import '../../app_home_features/user_profile/presentation/screens/profile_screen.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   final int index;
@@ -64,7 +64,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Overview'),
           BottomNavigationBarItem(icon: Icon(Icons.book), label: 'My courses'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
+          BottomNavigationBarItem(icon: Icon(Icons.quiz), label: 'Mini quiz'),
           BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'settings'),
         ],
         type: BottomNavigationBarType.fixed,
@@ -93,7 +93,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       ),
       body: IndexedStack(
         index: _selectedIndex,
-        children: const [OverviewScreen(), CoursesScreen(), ProfileScreen(), SettingsScreen()],
+        children: const [OverviewScreen(), CoursesScreen(), CourseQuizScreen(), SettingsScreen()], //  ProfileScreen
       ),
     );
   }

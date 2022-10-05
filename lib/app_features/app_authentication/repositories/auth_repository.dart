@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -64,7 +64,9 @@ class AuthRepository extends ChangeNotifier implements AuthRepositoryInterface {
 
       notifyListeners();
     } on FirebaseAuthException catch (e) {
-      print(e.credential.toString());
+      if (kDebugMode) {
+        print(e.credential.toString());
+      }
     }
   }
 
@@ -78,7 +80,9 @@ class AuthRepository extends ChangeNotifier implements AuthRepositoryInterface {
       loginState = false;
       notifyListeners();
     } on FirebaseAuthException catch (e) {
-      print(e.credential.toString());
+      if (kDebugMode) {
+        print(e.credential.toString());
+      }
     }
   }
 
