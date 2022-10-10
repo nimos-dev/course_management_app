@@ -1,17 +1,19 @@
+// ignore_for_file: must_be_immutable, prefer_const_literals_to_create_immutables
+
 import 'package:equatable/equatable.dart';
 
 import '../enums/course_quiz_status.dart';
 import '../models/course_quiz_question_model.dart';
 
 class CourseQuizState extends Equatable {
-  final String selectedAnswer;
-  final List<CourseQuizQuestionModel> correct;
-  final List<CourseQuizQuestionModel> incorrect;
-  final CourseQuizStatus status;
+  String selectedAnswer;
+  List<CourseQuizQuestionModel> correct;
+  List<CourseQuizQuestionModel> incorrect;
+  CourseQuizStatus status;
 
   bool get answered => status == CourseQuizStatus.incorrect || status == CourseQuizStatus.correct;
 
-  const CourseQuizState({
+  CourseQuizState({
     required this.selectedAnswer,
     required this.correct,
     required this.incorrect,
@@ -19,12 +21,9 @@ class CourseQuizState extends Equatable {
   });
 
   factory CourseQuizState.initial() {
-    // ignore: prefer_const_constructors
     return CourseQuizState(
       selectedAnswer: '',
-      // ignore: prefer_const_literals_to_create_immutables
       correct: [],
-      // ignore: prefer_const_literals_to_create_immutables
       incorrect: [],
       status: CourseQuizStatus.initial,
     );

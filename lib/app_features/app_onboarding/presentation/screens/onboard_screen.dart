@@ -15,6 +15,7 @@ class OnboardScreen extends ConsumerWidget {
         children: [
           const Text('Onboard Screen!'),
           TextButton(
+            key: const Key('OnboardScreen_TextButton_Done'),
             onPressed: () {
               ref.read(authRepositoryProvider).onboarding = true;
             },

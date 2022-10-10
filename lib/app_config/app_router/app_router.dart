@@ -145,19 +145,15 @@ class AppRouter {
       final isGoingToOnboard = state.subloc == onboardLocation;
 
       if (!isInitialized && !isGoingToInit) {
-        // print('splash Screen');
         return splashLocation;
       } else if (isInitialized && !isOnboarded && !isGoingToOnboard) {
-        // print('onboard screen');
         return onboardLocation;
       } else if (isInitialized && isOnboarded && !isLogedIn && !isGoingToLogin && !isGoingToSignup) {
-        // print('Login');
         return loginLocation;
       } else if ((isLogedIn && isGoingToLogin) ||
           (isLogedIn && isGoingToSignup) ||
           (isInitialized && isGoingToInit) ||
           (isOnboarded && isGoingToOnboard)) {
-        // print('root');
         return rootLocation;
       } else {
         return null;

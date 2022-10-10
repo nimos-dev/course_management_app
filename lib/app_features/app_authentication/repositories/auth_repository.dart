@@ -47,7 +47,7 @@ class AuthRepository extends ChangeNotifier implements AuthRepositoryInterface {
 
   @override
   Future<void> onAppStart() async {
-    // _onboarding = sharedPreferences.getBool(onboardKey) ?? false;    // Get from sharedPreferences
+    _onboarding = sharedPreferences.getBool(onboardKey) ?? false; // Get from sharedPreferences
     loginState = sharedPreferences.getBool(signinKey) ?? false;
     await Future.delayed(const Duration(seconds: 2));
     _initialized = true;
