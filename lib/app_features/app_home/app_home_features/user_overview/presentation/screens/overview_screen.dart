@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../../../../extensions/string_extension.dart';
-import '../../../../../../extensions/app_localizations_context.dart';
 import '../../../../../app_authentication/app_authentication_providers.dart';
 
 class OverviewScreen extends ConsumerWidget {
@@ -15,25 +13,20 @@ class OverviewScreen extends ConsumerWidget {
         builder: (BuildContext context, WidgetRef ref, Widget? child) => Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text('My Overview...'),
-            const SizedBox(height: 8),
-            Text('Active language: ${context.loc.language.capitalize()}'),
-            const SizedBox(height: 16),
-            const Text('Active User'),
-            const SizedBox(height: 8),
-            Text('User ID: ${ref.read(authRepositoryProvider).userCredential?.user?.uid}'),
-            const SizedBox(height: 8),
-            Text('User Name: ${ref.watch(authRepositoryProvider).userCredential?.user?.displayName}'),
-            const SizedBox(height: 8),
-            Text('User Email: ${ref.watch(authRepositoryProvider).userCredential?.user?.email}'),
-            const SizedBox(height: 8),
-            Text('User Phone number: ${ref.watch(authRepositoryProvider).userCredential?.user?.phoneNumber}'),
+            Text('Hi, ${ref.watch(authRepositoryProvider).userCredential?.user?.displayName}'),
+            const SizedBox(height: 12),
+            Text(
+                'You have completed ${ref.watch(authRepositoryProvider).userCredential?.user?.displayName} Mini quiz!'),
+            const SizedBox(height: 12),
+            Text('Your average scores is ${ref.watch(authRepositoryProvider).userCredential?.user?.displayName}!'),
+            const SizedBox(height: 12),
+            Text(
+                'You completed your last miniquiz ${ref.watch(authRepositoryProvider).userCredential?.user?.displayName}!'),
+            const SizedBox(height: 12),
+            Text('Mini quiz daily streak: ${ref.watch(authRepositoryProvider).userCredential?.user?.displayName}!'),
           ],
         ),
       )),
     );
   }
 }
-
-/* 
- */

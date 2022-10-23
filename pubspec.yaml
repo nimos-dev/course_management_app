@@ -9,6 +9,8 @@ environment:
   sdk: ">=2.17.6 <3.0.0"
 
 dependencies:
+  isar: ^3.0.2
+  isar_flutter_libs: ^3.0.2
   equatable: ^2.0.5
   flutter:
     sdk: flutter
@@ -30,6 +32,9 @@ dependencies:
   dio: ^4.0.6
 
 dev_dependencies:
+  isar_generator: ^3.0.2
+  build_runner: ^2.3.2
+
   flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter

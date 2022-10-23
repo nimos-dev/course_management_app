@@ -12,9 +12,9 @@ class SplashProgressIndicator extends ConsumerWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: const [
-          Text('School Soft Project'),
+          Text('School Quiz Project', style: TextStyle(color: Colors.white)),
           SizedBox(height: 20),
-          CircularProgressIndicator(),
+          CircularProgressIndicator(color: Colors.white),
         ],
       ),
     );

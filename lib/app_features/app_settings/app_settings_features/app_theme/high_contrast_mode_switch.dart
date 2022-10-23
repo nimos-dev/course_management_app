@@ -16,7 +16,7 @@ class _HighContrastModeSwitch extends ConsumerState<HighContrastModeSwitch> {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, Widget? child) {
         return Switch(
-          value: ref.watch(appThemeStateNotifier).isHighContrastEnabled,
+          value: ref.watch(appThemeStateNotifier).isHighContrastEnabled ?? false,
           onChanged: (enabled) {
             if (enabled) {
               ref.read(appThemeStateNotifier).setHighContrastOn();

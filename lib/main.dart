@@ -20,9 +20,7 @@ Future<void> main() async {
   await Firebase.initializeApp();
   final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
   runApp(ProviderScope(overrides: [
-    sharedPreferencesProvider.overrideWithValue(
-      sharedPreferences,
-    ),
+    sharedPreferencesProvider.overrideWithValue(sharedPreferences),
   ], child: MySchoolApp(sharedPreferences: sharedPreferences)));
 }
 
@@ -55,11 +53,11 @@ class _MySchoolAppState extends ConsumerState<MySchoolApp> {
         GlobalWidgetsLocalizations.delegate,
       ],
       debugShowCheckedModeBanner: false,
-      title: 'School Soft Project',
-      themeMode: appThemeState.isDarkModeEnabled ? ThemeMode.dark : ThemeMode.light,
-      theme: appThemeState.isHighContrastEnabled ? highContrastlightTheme() : lightTheme(),
+      title: 'School Quiz Project',
+      themeMode: appThemeState.isDarkModeEnabled ?? true ? ThemeMode.dark : ThemeMode.light,
+      theme: appThemeState.isHighContrastEnabled ?? false ? highContrastlightTheme() : lightTheme(),
       highContrastTheme: highContrastlightTheme(),
-      darkTheme: appThemeState.isHighContrastEnabled ? highContrastDarkTheme() : darkTheme(),
+      darkTheme: appThemeState.isHighContrastEnabled ?? false ? highContrastDarkTheme() : darkTheme(),
       highContrastDarkTheme: highContrastDarkTheme(),
       routeInformationProvider: appRouter.router.routeInformationProvider,
       routeInformationParser: appRouter.router.routeInformationParser,

@@ -56,15 +56,15 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         elevation: 0,
         leading: const Icon(Icons.rocket_launch), // TODO: Make your own custom logo/icon
         title: const Text(
-          'NanoCourse',
+          'NanoQuiz',
           style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: Colors.white),
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Overview'),
-          BottomNavigationBarItem(icon: Icon(Icons.book), label: 'My courses'),
           BottomNavigationBarItem(icon: Icon(Icons.quiz), label: 'Mini quiz'),
+          BottomNavigationBarItem(icon: Icon(Icons.book), label: 'My results'),
           BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'settings'),
         ],
         type: BottomNavigationBarType.fixed,
@@ -78,10 +78,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   context.go('/overview');
                   break;
                 case 1:
-                  context.go('/courses');
+                  context.go('/profile');
                   break;
                 case 2:
-                  context.go('/profile');
+                  context.go('/courses');
                   break;
                 case 3:
                   context.go('/settings');
@@ -93,7 +93,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       ),
       body: IndexedStack(
         index: _selectedIndex,
-        children: const [OverviewScreen(), CoursesScreen(), CourseQuizScreen(), SettingsScreen()], //  ProfileScreen
+        children: const [OverviewScreen(), CourseQuizScreen(), CoursesScreen(), SettingsScreen()], //  ProfileScreen
       ),
     );
   }

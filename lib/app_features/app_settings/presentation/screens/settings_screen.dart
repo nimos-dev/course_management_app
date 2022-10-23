@@ -36,7 +36,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               SettingsWidget(
                 key: const Key('DarkModeSwitch'),
                 labelText: 'Enable dark mode',
-                prefixIcon: appThemeState.isDarkModeEnabled ? Icons.wb_cloudy : Icons.wb_sunny,
+                prefixIcon: appThemeState.isDarkModeEnabled ?? true ? Icons.wb_cloudy : Icons.wb_sunny,
                 sufix: const DarkModeSwitch(),
               ),
               // -----> High contrast mode
