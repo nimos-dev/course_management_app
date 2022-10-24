@@ -5,6 +5,8 @@ import 'package:firebase_core/firebase_core.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'app_config/app_config_provider.dart';
@@ -19,6 +21,8 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  await Hive.initFlutter();
+  await Hive.openBox('nano_quiz');
   runApp(ProviderScope(overrides: [
     sharedPreferencesProvider.overrideWithValue(sharedPreferences),
   ], child: MySchoolApp(sharedPreferences: sharedPreferences)));

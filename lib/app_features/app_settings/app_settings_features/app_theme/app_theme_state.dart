@@ -19,36 +19,24 @@ class AppThemeState extends ChangeNotifier {
 
   void setLightTheme() {
     sharedPreferences.setBool(darkModeKey, false);
-    if (kDebugMode) {
-      print('setDarkTheme false ${sharedPreferences.get(darkModeKey)}');
-    }
     isDarkModeEnabled = false;
     notifyListeners();
   }
 
   void setDarkTheme() {
     sharedPreferences.setBool(darkModeKey, true);
-    if (kDebugMode) {
-      print('setDarkTheme true ${sharedPreferences.get(darkModeKey)}');
-    }
     isDarkModeEnabled = true;
     notifyListeners();
   }
 
   void setHighContrastOff() {
     sharedPreferences.setBool(highContrastKey, false);
-    if (kDebugMode) {
-      print('setHighContrastoff false: ${sharedPreferences.get(highContrastKey)}');
-    }
     isHighContrastEnabled = false;
     notifyListeners();
   }
 
   void setHighContrastOn() {
     sharedPreferences.setBool(highContrastKey, true);
-    if (kDebugMode) {
-      print('setHighContrastOn true: + ${sharedPreferences.get(highContrastKey)}');
-    }
     isHighContrastEnabled = true;
     notifyListeners();
   }

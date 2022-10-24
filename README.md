@@ -8,9 +8,9 @@ Test key: ABC123
 
 #
 
-Database is: Isar
+Database is: Hive
 
-https://pub.dev/packages/isar
+https://pub.dev/packages/hive
 
 #
 Run if "*.g.dart" file is missing...

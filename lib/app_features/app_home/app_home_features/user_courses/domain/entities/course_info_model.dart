@@ -24,33 +24,21 @@ class CourseInfoModel {
 
 List<CourseInfoModel> myCourses = [
   CourseInfoModel(
-    title: 'GDPR for app developers',
-    description: 'The course deals with basic laws and regulations that apply as a result of GDPR\'s introduction',
+    title: 'Computer science quiz (Easy)',
+    description: 'Test...',
     level: 'Advanced',
-    indicatorValue: 1.0,
-  ),
-  CourseInfoModel(
-    title: 'Cooking in 15 minutes',
-    description: 'The course teach you to cook ten nutritious and tasty meals in under 15 minutes',
-    level: 'Beginner',
     indicatorValue: 0.33,
   ),
   CourseInfoModel(
-    title: 'Vegetable growing (Basic)',
-    description: 'Learn the basics of successful small-scale vegetable farming in an urban environment',
+    title: 'Computer science quiz (Normal)',
+    description: 'Test...',
     level: 'Beginner',
-    indicatorValue: 0.33,
-  ),
-  CourseInfoModel(
-    title: 'Vegetable growing (Advanced)',
-    description: 'Learn the basics of microgreen cultivation in an urban environment',
-    level: 'Intermidiate',
     indicatorValue: 0.66,
   ),
   CourseInfoModel(
-    title: 'Vegetable growing (Expert)',
-    description: 'Market gardening in an urban environment',
-    level: 'Advanced',
-    indicatorValue: 1.0,
+    title: 'Computer science quiz (Advanced)',
+    description: 'Test...',
+    level: 'Beginner',
+    indicatorValue: 1.00,
   ),
 ];
