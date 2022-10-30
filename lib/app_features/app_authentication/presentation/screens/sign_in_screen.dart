@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 
 import '../../app_authentication_providers.dart';
 import '../widgets/auth_form_widget.dart';
-import '../widgets/change_to_widget.dart';
+import '../widgets/change_to_register_widget.dart';
+import '../widgets/google_sign_in_widget.dart';
 
 class SignInScreen extends ConsumerStatefulWidget {
   const SignInScreen({Key? key}) : super(key: key);
@@ -31,7 +32,9 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
             Column(
               children: [
                 AuthFormWidget(formKey: _formKey, email: _email, password: _password, state: state, ref: ref),
-                ChangeTo(state: state)
+                ChangeToRegister(state: state),
+                const SizedBox(height: 25),
+                GoogleSignInWidget(state: state, ref: ref)
               ],
             ),
           ],

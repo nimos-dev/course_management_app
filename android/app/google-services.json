@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "324344000450-8k9r9p746inljkonnv4s378qt0irsn12.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.school_soft_project",
+            "certificate_hash": "4a5177331cd40eae0370130e43ed000fb88e2d53"
+          }
+        },
+        {
           "client_id": "324344000450-pj3alm3j5le43j0e7mb60co081864v6t.apps.googleusercontent.com",
           "client_type": 3
         }

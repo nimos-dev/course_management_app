@@ -4,10 +4,8 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../app_config/app_router/app_router_constants.dart';
 
-// TODO: Rebuild and reuse in create account
-
-class ChangeTo extends StatelessWidget {
-  const ChangeTo({
+class ChangeToSignIn extends StatelessWidget {
+  const ChangeToSignIn({
     Key? key,
     required this.state,
   }) : super(key: key);
@@ -19,11 +17,11 @@ class ChangeTo extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Text('Don\'t have an account ?'),
+        const Text('Already have an account ?'),
         TextButton(
-          onPressed: () async => state.isLoading ? null : context.goNamed(createAccountRouteName),
+          onPressed: () async => state.isLoading ? null : context.goNamed(loginRouteName),
           child: const Text(
-            'Create new account !',
+            'Go to Sign In !',
             style: TextStyle(color: Colors.orange),
           ),
         ),

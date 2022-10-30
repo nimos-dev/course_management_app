@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'auth_repository_interface.dart';
@@ -87,4 +88,43 @@ class AuthRepository extends ChangeNotifier implements AuthRepositoryInterface {
   }
 
   // ----->
+
+  @override
+  Future<void> registerWithEmailAndPassword(String email, String password) async {
+    try {
+      userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: password);
+      loginState = true;
+      notifyListeners();
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        if (kDebugMode) {
+          print('The password provided is too weak.');
+        }
+      } else if (e.code == 'email-already-in-use') {
+        if (kDebugMode) {
+          print('The account already exists for that email.');
+        }
+      }
+    } catch (e) {
+      if (kDebugMode) {
+        print(e);
+      }
+    }
+  }
+
+  @override
+  Future<void> signInWithGoogle() async {
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+    final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+
+    final credential =
+        GoogleAuthProvider.credential(accessToken: googleAuth?.accessToken, idToken: googleAuth?.idToken);
+
+    userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
+    if (userCredential != null) {
+      loginState = true;
+      notifyListeners();
+    }
+  }
 }

@@ -4,8 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../app_settings/presentation/widgets/custom_text_field_widget.dart';
 import '../../app_authentication_providers.dart';
 
-class AuthFormWidget extends StatelessWidget {
-  const AuthFormWidget({
+class RegisterFormWidget extends StatelessWidget {
+  const RegisterFormWidget({
     Key? key,
     required GlobalKey<FormState> formKey,
     required TextEditingController email,
@@ -32,7 +32,7 @@ class AuthFormWidget extends StatelessWidget {
           const Center(
               child: Padding(
             padding: EdgeInsets.all(8.0),
-            child: Text('Sign In'),
+            child: Text('Register'),
           )),
           CustomTextFieldWidget(labelText: 'E-mail', obscureText: false, textEditingController: _email),
           CustomTextFieldWidget(labelText: 'Password', obscureText: true, textEditingController: _password),
@@ -42,8 +42,8 @@ class AuthFormWidget extends StatelessWidget {
                 state.isLoading
                     ? null
                     : ref
-                        .read(signInScreenControllerProvider.notifier)
-                        .signInWithEmailAndPassword(_email.text, _password.text);
+                        .read(registerScreenControllerProvider.notifier)
+                        .registerWithEmailAndPassword(_email.text, _password.text);
               },
               child: const Text('OK'),
             ),

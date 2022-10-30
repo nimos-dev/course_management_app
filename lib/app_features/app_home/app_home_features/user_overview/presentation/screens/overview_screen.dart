@@ -14,7 +14,7 @@ class OverviewScreen extends ConsumerWidget {
         builder: (BuildContext context, WidgetRef ref, Widget? child) => Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('Hi, ${ref.watch(authRepositoryProvider).userCredential?.user?.displayName}'),
+            Text('Hi, ${ref.watch(authRepositoryProvider).userCredential?.user?.displayName ?? 'Anonymous'}'),
             const SizedBox(height: 12),
             Text('You have completed ${ref.watch(hiveServiceProvider).readTestDataNumberof()} Mini Quiz!'),
             const SizedBox(height: 12),
