@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -58,16 +59,37 @@ class AuthRepository extends ChangeNotifier implements AuthRepositoryInterface {
   // ----->
 
   @override
-  Future<void> signInWithEmailAndPassword(emailAddress, password) async {
+  Future<void> signInWithEmailAndPassword(emailAddress, password, context) async {
+    String errorString = '';
+
     try {
       userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(email: emailAddress, password: password);
       loginState = true;
 
       notifyListeners();
     } on FirebaseAuthException catch (e) {
-      if (kDebugMode) {
-        print(e.credential.toString());
+      if (e.code == 'user-not-found') {
+        errorString = 'No user found for that email.';
+      } else if (e.code == 'wrong-password') {
+        errorString = 'Wrong password provided !';
       }
+    }
+
+    if (errorString != '') {
+      await showDialog(
+        context: context,
+        builder: (ctx) => AlertDialog(
+          title: const Text('Error Occured'),
+          content: Text(errorString),
+          actions: [
+            TextButton(
+                onPressed: () {
+                  Navigator.of(ctx).pop();
+                },
+                child: const Text("OK"))
+          ],
+        ),
+      );
     }
   }
 

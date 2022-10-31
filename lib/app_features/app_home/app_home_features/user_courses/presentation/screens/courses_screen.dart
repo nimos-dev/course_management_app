@@ -1,29 +1,54 @@
-import 'package:go_router/go_router.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../../app_config/app_router/app_router_constants.dart';
-import '../../domain/entities/course_info_model.dart';
+import '../../../../../../global_services/firebase_services/Firestore_service.dart';
 
-class CoursesScreen extends StatelessWidget {
+class CoursesScreen extends ConsumerWidget {
   const CoursesScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    // final items = List<String>.generate(10, (i) => 'Course $i');
-    return Scaffold(
-      body: ListView.builder(
-        physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
-        itemCount: myCourses.length,
-        itemBuilder: (context, index) {
-          return ListTile(
-            title: Text(myCourses[index].title),
-            onTap: () {
-              // final course = myCourses[index];
-              context.goNamed(coursesDetailsRouteName, params: {'course': myCourses[index].id});
-            },
-          );
-        },
+  Widget build(BuildContext context, WidgetRef ref) {
+    final Stream<QuerySnapshot> usersStream = FirebaseFirestore.instance.collection('users').snapshots();
+
+    return Column(children: [
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          TextButton(
+            onPressed: () => ref.read(firestoreServiceProvider).addUser(),
+            child: const Text('Add test data...'),
+          ),
+        ],
       ),
-    );
+      Expanded(
+        child: StreamBuilder<QuerySnapshot>(
+          stream: usersStream,
+          builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+            if (snapshot.hasError) {
+              return const Text('Something went wrong');
+            }
+
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Text("Loading");
+            }
+
+            return ListView(
+              children: snapshot.data!.docs.map((DocumentSnapshot document) {
+                Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
+                return GestureDetector(
+                  onDoubleTap: () => ref.read(firestoreServiceProvider).deleteUser(document.id),
+                  onTap: () => ref.read(firestoreServiceProvider).updateUser(document.id, !data['Right']),
+                  child: ListTile(
+                    title: Text(data['Question']),
+                    subtitle: Text(data['Right'].toString()),
+                  ),
+                );
+              }).toList(),
+            );
+          },
+        ),
+      ),
+    ]);
   }
 }

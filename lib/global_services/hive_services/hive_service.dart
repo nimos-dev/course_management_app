@@ -10,6 +10,19 @@ class HiveService extends ChangeNotifier {
 
   HiveService();
 
+  void setAvatarLink(String string) {
+    _mybox.put('my_avatar_link', string);
+    notifyListeners();
+  }
+
+  String getAvatarLink() {
+    if (_mybox.containsKey('my_avatar_link')) {
+      return _mybox.get('my_avatar_link');
+    } else {
+      return '';
+    }
+  }
+
   // TODO: Implement custom box class fore data...
 
   // create or uppdate datavalue

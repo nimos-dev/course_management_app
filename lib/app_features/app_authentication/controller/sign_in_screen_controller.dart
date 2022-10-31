@@ -7,9 +7,11 @@ class SignInScreenController extends StateNotifier<AsyncValue<void>> {
 
   final AuthRepository authRepository;
 
-  Future<void> signInWithEmailAndPassword(emailAddress, password) async {
+  Future<String> signInWithEmailAndPassword(emailAddress, password, context) async {
     state = const AsyncLoading<void>();
-    state = await AsyncValue.guard<void>(() => authRepository.signInWithEmailAndPassword(emailAddress, password));
+    state =
+        await AsyncValue.guard<void>(() => authRepository.signInWithEmailAndPassword(emailAddress, password, context));
+    return 'APA';
   }
 
   Future<void> signInWithGoogle() async {

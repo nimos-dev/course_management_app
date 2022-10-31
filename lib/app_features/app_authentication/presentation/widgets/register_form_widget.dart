@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../app_settings/presentation/widgets/custom_text_field_widget.dart';
+import 'custom_email_text_field_widget.dart';
 import '../../app_authentication_providers.dart';
+import 'custom_password_text_field_widget.dart';
 
 class RegisterFormWidget extends StatelessWidget {
   const RegisterFormWidget({
@@ -34,16 +35,20 @@ class RegisterFormWidget extends StatelessWidget {
             padding: EdgeInsets.all(8.0),
             child: Text('Register'),
           )),
-          CustomTextFieldWidget(labelText: 'E-mail', obscureText: false, textEditingController: _email),
-          CustomTextFieldWidget(labelText: 'Password', obscureText: true, textEditingController: _password),
+          CustomEmailTextFieldWidget(labelText: 'E-mail', obscureText: false, textEditingController: _email),
+          CustomPasswordTextFieldWidget(labelText: 'Password', obscureText: true, textEditingController: _password),
           Center(
             child: TextButton(
               onPressed: () {
-                state.isLoading
-                    ? null
-                    : ref
-                        .read(registerScreenControllerProvider.notifier)
-                        .registerWithEmailAndPassword(_email.text, _password.text);
+                if (!_formKey.currentState!.validate()) {
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Error:')));
+                } else {
+                  state.isLoading
+                      ? null
+                      : ref
+                          .read(registerScreenControllerProvider.notifier)
+                          .registerWithEmailAndPassword(_email.text, _password.text);
+                }
               },
               child: const Text('OK'),
             ),
