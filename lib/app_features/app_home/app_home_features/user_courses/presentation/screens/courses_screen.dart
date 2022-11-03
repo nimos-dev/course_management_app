@@ -1,54 +1,107 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
+import 'package:school_soft_project/app_features/app_authentication/app_authentication_providers.dart';
 
 import '../../../../../../global_services/firebase_services/Firestore_service.dart';
+import '../../../../../app_settings/app_settings_features/app_theme/app_theme_state.dart';
+import '../../../../../course_quiz/presentation/utils/box_shadow_utils.dart';
 
 class CoursesScreen extends ConsumerWidget {
   const CoursesScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final Stream<QuerySnapshot> usersStream = FirebaseFirestore.instance.collection('users').snapshots();
+    final Stream<QuerySnapshot> usersStream = FirebaseFirestore.instance
+        .collection('questions')
+        .doc(ref.read(authRepositoryProvider).getUserID())
+        .collection('my_questions')
+        .snapshots();
 
-    return Column(children: [
-      Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          TextButton(
-            onPressed: () => ref.read(firestoreServiceProvider).addUser(),
-            child: const Text('Add test data...'),
-          ),
-        ],
-      ),
-      Expanded(
-        child: StreamBuilder<QuerySnapshot>(
-          stream: usersStream,
-          builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-            if (snapshot.hasError) {
-              return const Text('Something went wrong');
-            }
+    return StreamBuilder<QuerySnapshot>(
+      stream: usersStream,
+      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+        if (snapshot.hasError) {
+          return const Text('Something went wrong');
+        }
 
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Text("Loading");
-            }
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Text("Loading");
+        }
 
-            return ListView(
-              children: snapshot.data!.docs.map((DocumentSnapshot document) {
-                Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
-                return GestureDetector(
-                  onDoubleTap: () => ref.read(firestoreServiceProvider).deleteUser(document.id),
-                  onTap: () => ref.read(firestoreServiceProvider).updateUser(document.id, !data['Right']),
-                  child: ListTile(
-                    title: Text(data['Question']),
-                    subtitle: Text(data['Right'].toString()),
-                  ),
-                );
-              }).toList(),
-            );
-          },
-        ),
-      ),
-    ]);
+        return Column(
+          children: [
+            const Padding(
+              padding: EdgeInsets.fromLTRB(0, 16, 0, 16),
+              child: Text('Practice the questions you answered incorrectly...'),
+            ),
+            Expanded(
+              child: ListView(
+                shrinkWrap: true,
+                scrollDirection: Axis.vertical,
+                physics: const BouncingScrollPhysics(),
+                children: snapshot.data!.docs.map((DocumentSnapshot document) {
+                  Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
+                  return GestureDetector(
+                    onDoubleTap: () {
+                      String? uID = ref.read(authRepositoryProvider).getUserID();
+                      if (uID != null) {
+                        ref.read(firestoreServiceProvider).deleteUser(document.id, uID);
+                      }
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+                      child: Container(
+                        decoration: const BoxDecoration(
+                          color: Colors.white,
+                          boxShadow: boxShadow,
+                        ),
+                        child: ListTile(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(2),
+                          ),
+                          tileColor:
+                              ref.watch(appThemeStateNotifier).isDarkModeEnabled! ? Colors.white12 : Colors.black12,
+                          title: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 8.0),
+                            child: Text(
+                              stripHtml(data['Question']),
+                              style: const TextStyle(color: Colors.black54),
+                            ),
+                          ),
+                          subtitle: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 8.0),
+                            child: RichText(
+                              text: TextSpan(
+                                style: Theme.of(context).textTheme.bodyText2,
+                                children: <TextSpan>[
+                                  const TextSpan(
+                                    text: 'The correct answer is:',
+                                    style: TextStyle(color: Colors.black54),
+                                  ),
+                                  TextSpan(
+                                    text: ' ${stripHtml(data['Answer'])}',
+                                    style: const TextStyle(color: Colors.green),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                }).toList(),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+  // Help function Strip HTML tags from API data...
+
+  static String stripHtml(String text) {
+    return text.replaceAll(RegExp(r'<[^>]*>|&[^;]+;'), ' ');
   }
 }

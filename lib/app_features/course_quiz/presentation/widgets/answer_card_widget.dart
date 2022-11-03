@@ -41,7 +41,7 @@ class AnswerCard extends ConsumerWidget {
                 : Colors.white,
             width: 3.0,
           ),
-          borderRadius: BorderRadius.circular(10.0),
+          borderRadius: BorderRadius.circular(2.0),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

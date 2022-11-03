@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../../app_features/app_authentication/repositories/auth_repository.dart';
 import '../../app_features/app_authentication/presentation/screens/create_account_screen.dart';
 import '../../app_features/app_authentication/presentation/screens/sign_in_screen.dart';
-import '../../app_features/app_home/app_home_features/user_courses/presentation/screens/details_screen.dart';
+
 import '../../app_features/app_home/presentation/screens/home_screen.dart';
 import '../../app_features/app_introduction/presentation/screens/splash_screen.dart';
 import '../../app_features/app_onboarding/presentation/screens/onboard_screen.dart';
@@ -72,18 +72,6 @@ class AppRouter {
             child: HomeScreen(tab: tab),
           );
         },
-        routes: [
-          GoRoute(
-            name: subCoursesDetailsRouteName,
-            path: 'details/:course',
-            pageBuilder: (context, state) => MaterialPage<void>(
-              key: state.pageKey,
-              child: DetailsScreen(
-                id: state.params['course']!,
-              ),
-            ),
-          ),
-        ],
       ),
 
       // redirect...

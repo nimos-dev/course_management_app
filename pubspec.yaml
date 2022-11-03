@@ -9,6 +9,7 @@ environment:
   sdk: ">=2.17.6 <3.0.0"
 
 dependencies:
+  flutter_launcher_icons: ^0.10.0
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   equatable: ^2.0.5
@@ -49,3 +50,11 @@ dev_dependencies:
 flutter:
   generate: true
   uses-material-design: true
+
+  assets:
+    - assets/icons/
+    - assets/pictures/
+
+flutter_icons:
+  android: "launcher_icon"
+  image_path: "assets/icons/quiz.png"

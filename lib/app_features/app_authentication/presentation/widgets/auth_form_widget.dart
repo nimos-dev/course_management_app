@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'custom_email_text_field_widget.dart';
@@ -40,6 +41,8 @@ class AuthFormWidget extends StatelessWidget {
           Center(
             child: TextButton(
               onPressed: () {
+                SystemChannels.textInput.invokeMethod('TextInput.hide');
+                FocusScope.of(context).requestFocus(FocusNode());
                 if (!_formKey.currentState!.validate()) {
                   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Error:')));
                 } else {

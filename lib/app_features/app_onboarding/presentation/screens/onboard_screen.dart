@@ -13,13 +13,33 @@ class OnboardScreen extends ConsumerWidget {
           child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text('Onboard Screen!'),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 48),
+            child: Image.asset('assets/pictures/temp_pic.png'),
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: const [
+              Padding(
+                padding: EdgeInsets.all(4.0),
+                child: Text('1: Test your knowledge by taking a nano-quiz !'),
+              ),
+              Padding(
+                padding: EdgeInsets.all(4.0),
+                child: Text('2: Repeat the subjects you didn\'t know the answers to !'),
+              ),
+              Padding(
+                padding: EdgeInsets.all(4.0),
+                child: Text('3: Try again to see if you understood everything !'),
+              ),
+            ],
+          ),
           TextButton(
             key: const Key('OnboardScreen_TextButton_Done'),
             onPressed: () {
               ref.read(authRepositoryProvider).onboarding = true;
             },
-            child: const Text('Done!'),
+            child: const Text('Start now!'),
           )
         ],
       )),

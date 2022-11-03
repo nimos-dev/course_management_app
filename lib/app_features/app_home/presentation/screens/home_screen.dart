@@ -54,17 +54,21 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         elevation: 0,
-        leading: const Icon(Icons.rocket_launch), // TODO: Make your own custom logo/icon
+        leading: const Icon(Icons.rocket_launch),
         title: const Text(
           'NanoQuiz',
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: Colors.white),
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.w500,
+            color: Colors.white,
+          ),
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Overview'),
           BottomNavigationBarItem(icon: Icon(Icons.quiz), label: 'Mini quiz'),
-          BottomNavigationBarItem(icon: Icon(Icons.book), label: 'My results'),
+          BottomNavigationBarItem(icon: Icon(Icons.book), label: 'Practice'),
           BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'settings'),
         ],
         type: BottomNavigationBarType.fixed,

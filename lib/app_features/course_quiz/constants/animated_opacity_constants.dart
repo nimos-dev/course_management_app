@@ -1,3 +1,3 @@
 // animated_opacity_constants
 
-const int animationDuration = 350;
+const int animationDuration = 250;

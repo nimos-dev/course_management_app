@@ -55,7 +55,7 @@ class QuizQuestions extends ConsumerWidget {
                           isSelected: e == state.selectedAnswer,
                           isCorrect: e == question.correctAnswer,
                           isDisplayingAnswer: state.answered,
-                          onTap: () => ref.read(quizControllerProvider.notifier).submitAnswer(question, e)),
+                          onTap: () => ref.read(quizControllerProvider.notifier).submitAnswer(question, e, ref)),
                     )
                     .toList(),
               ),

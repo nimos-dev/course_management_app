@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:school_soft_project/global_services/hive_services/hive_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'auth_repository_interface.dart';
@@ -18,7 +19,8 @@ class AuthRepository extends ChangeNotifier implements AuthRepositoryInterface {
   final SharedPreferences sharedPreferences;
   final Ref ref;
 
-  UserCredential? userCredential;
+  User? user;
+  String displayName = 'Anonymous';
 
   bool _loginState = false;
   bool _initialized = false;
@@ -27,6 +29,10 @@ class AuthRepository extends ChangeNotifier implements AuthRepositoryInterface {
   bool get loginState => _loginState;
   bool get initialized => _initialized;
   bool get onboarding => _onboarding;
+
+  String? getUserID() {
+    return user?.uid;
+  }
 
   set initialized(bool value) {
     _initialized = value;
@@ -63,8 +69,12 @@ class AuthRepository extends ChangeNotifier implements AuthRepositoryInterface {
     String errorString = '';
 
     try {
-      userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(email: emailAddress, password: password);
+      user = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: emailAddress, password: password)
+          .then((value) => value.user);
+
       loginState = true;
+      ref.read(hiveServiceProvider).setUserName(user?.displayName ?? '');
 
       notifyListeners();
     } on FirebaseAuthException catch (e) {
@@ -99,8 +109,9 @@ class AuthRepository extends ChangeNotifier implements AuthRepositoryInterface {
   Future<void> signOut() async {
     try {
       await FirebaseAuth.instance.signOut();
-      userCredential = null;
+      user = null;
       loginState = false;
+      ref.read(hiveServiceProvider).setUserName(user?.displayName ?? '');
       notifyListeners();
     } on FirebaseAuthException catch (e) {
       if (kDebugMode) {
@@ -114,8 +125,11 @@ class AuthRepository extends ChangeNotifier implements AuthRepositoryInterface {
   @override
   Future<void> registerWithEmailAndPassword(String email, String password) async {
     try {
-      userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: password);
+      user = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(email: email, password: password)
+          .then((value) => value.user);
       loginState = true;
+      ref.read(hiveServiceProvider).setUserName(user?.displayName ?? '');
       notifyListeners();
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
@@ -143,9 +157,10 @@ class AuthRepository extends ChangeNotifier implements AuthRepositoryInterface {
     final credential =
         GoogleAuthProvider.credential(accessToken: googleAuth?.accessToken, idToken: googleAuth?.idToken);
 
-    userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
-    if (userCredential != null) {
+    user = await FirebaseAuth.instance.signInWithCredential(credential).then((value) => value.user);
+    if (user != null) {
       loginState = true;
+      ref.read(hiveServiceProvider).setUserName(user?.displayName ?? '');
       notifyListeners();
     }
   }

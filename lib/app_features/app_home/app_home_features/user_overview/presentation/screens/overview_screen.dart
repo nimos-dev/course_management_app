@@ -16,11 +16,16 @@ class OverviewScreen extends ConsumerStatefulWidget {
 }
 
 class _OverviewScreenState extends ConsumerState<OverviewScreen> {
-  late String profilePicLink;
+  String profilePicLink = '';
+  String uID = '';
 
   @override
   void initState() {
-    profilePicLink = ref.read(hiveServiceProvider).getAvatarLink();
+    if (ref.read(authRepositoryProvider).getUserID() != null) {
+      uID = ref.read(authRepositoryProvider).getUserID()!;
+      profilePicLink = ref.read(hiveServiceProvider).getAvatarLink();
+    }
+
     super.initState();
   }
 
@@ -53,24 +58,17 @@ class _OverviewScreenState extends ConsumerState<OverviewScreen> {
               ),
               // ---------------->
               const SizedBox(height: 12),
-              Text('Hi, ${ref.watch(authRepositoryProvider).userCredential?.user?.displayName ?? 'Anonymous'}'),
+
+              Text('Hi, ${ref.watch(hiveServiceProvider).getUserName()}'),
               const SizedBox(height: 12),
               Text('You have completed ${ref.watch(hiveServiceProvider).readTestDataNumberof()} Mini Quiz!'),
               const SizedBox(height: 12),
               Text(
                   'Your average scores is ${ref.watch(hiveServiceProvider).readTestDataAverageScore().toStringAsFixed(2)} !'),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  TextButton(
-                    onPressed: () => ref.read(hiveServiceProvider).writeTestData(),
-                    child: const Text('Add'),
-                  ),
-                  TextButton(
-                    onPressed: () => ref.read(hiveServiceProvider).deleteTestData(),
-                    child: const Text('Delete'),
-                  )
-                ],
+              const SizedBox(height: 12),
+              TextButton(
+                onPressed: () => ref.read(hiveServiceProvider).deleteTestData(),
+                child: const Text('Reset my progress!'),
               ),
             ],
           );
@@ -79,13 +77,12 @@ class _OverviewScreenState extends ConsumerState<OverviewScreen> {
     );
   }
 
+  // nead to refactor to own file...
   void pickUploadProfilePic(WidgetRef myRef) async {
     final image =
         await ImagePicker().pickImage(source: ImageSource.gallery, maxHeight: 512, maxWidth: 512, imageQuality: 90);
 
-    Reference ref = FirebaseStorage.instance
-        .ref()
-        .child('${myRef.read(authRepositoryProvider).userCredential?.user?.uid}_avatar.jpg');
+    Reference ref = FirebaseStorage.instance.ref().child('${myRef.read(authRepositoryProvider).user?.uid}_avatar.jpg');
 
     if (image != null) {
       await ref.putFile(File(image.path));
@@ -93,9 +90,13 @@ class _OverviewScreenState extends ConsumerState<OverviewScreen> {
 
     // Temp, extract using Riverpod....
 
-    ref.getDownloadURL().then((value) async => setState(() {
-          profilePicLink = value;
-          myRef.read(hiveServiceProvider).setAvatarLink(value);
-        }));
+    ref.getDownloadURL().then(
+          (value) async => setState(
+            () {
+              profilePicLink = value;
+              myRef.read(hiveServiceProvider).setAvatarLink(value);
+            },
+          ),
+        );
   }
 }

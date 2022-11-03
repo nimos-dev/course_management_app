@@ -1,5 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../global_services/firebase_services/Firestore_service.dart';
+import '../../app_authentication/app_authentication_providers.dart';
 import '../enums/course_quiz_status.dart';
 import '../models/course_quiz_question_model.dart';
 
@@ -9,7 +11,7 @@ class CourseQuizController extends StateNotifier<CourseQuizState> {
   //
   CourseQuizController() : super(CourseQuizState.initial());
 
-  void submitAnswer(CourseQuizQuestionModel currentQuestion, String answer) {
+  void submitAnswer(CourseQuizQuestionModel currentQuestion, String answer, WidgetRef ref) {
     if (state.answered) return;
     if (currentQuestion.correctAnswer == answer) {
       state = state.copyWith(
@@ -25,6 +27,12 @@ class CourseQuizController extends StateNotifier<CourseQuizState> {
         incorrect: (state.incorrect)..add(currentQuestion),
         status: CourseQuizStatus.incorrect,
       );
+      String? uID = ref.read(authRepositoryProvider).getUserID();
+      if (uID != null) {
+        ref
+            .read(firestoreServiceProvider)
+            .addQuestion(currentQuestion.question, currentQuestion.correctAnswer, false, uID);
+      }
     }
   }
 

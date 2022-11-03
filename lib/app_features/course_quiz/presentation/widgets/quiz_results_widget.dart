@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:school_soft_project/global_services/hive_services/hive_service.dart';
 
 import '../../constants/animated_opacity_constants.dart';
 import '../../constants/language_constants.dart';
@@ -37,6 +38,7 @@ class QuizResults extends ConsumerWidget {
           CustomButton(
             title: newQuiz,
             onTap: () async {
+              ref.read(hiveServiceProvider).addTestData(state.correct.length);
               ref.read(animatedOpacityBoolProvider.state).state = false;
               await ref.refresh(quizQuestionsProvider.future);
               await Future.delayed(const Duration(milliseconds: animationDuration));
