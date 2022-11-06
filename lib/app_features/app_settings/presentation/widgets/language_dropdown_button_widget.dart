@@ -27,14 +27,7 @@ class _LanguageDropdownButtonState extends ConsumerState<LanguageDropdownButton>
       child: DropdownButton<Locale>(
         value: l10nState.locale,
         items: const [
-          DropdownMenuItem(value: Locale('da'), child: Text('Dansk')),
-          DropdownMenuItem(value: Locale('de'), child: Text('Deutsch')),
           DropdownMenuItem(value: Locale('en'), child: Text('English')),
-          DropdownMenuItem(value: Locale('es'), child: Text('Español')),
-          DropdownMenuItem(value: Locale('fr'), child: Text('Français')),
-          DropdownMenuItem(value: Locale('it'), child: Text('Italiano')),
-          DropdownMenuItem(value: Locale('nb'), child: Text('Norsk')),
-          DropdownMenuItem(value: Locale('pt'), child: Text('Português')),
           DropdownMenuItem(value: Locale('sv'), child: Text('Svenska')),
         ],
         onChanged: (Locale? value) {

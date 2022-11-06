@@ -1,5 +1,7 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:school_soft_project/extensions/string_extension.dart';
 import 'package:school_soft_project/global_services/hive_services/hive_service.dart';
 
 import '../../constants/animated_opacity_constants.dart';
@@ -29,14 +31,14 @@ class QuizResults extends ConsumerWidget {
             style: const TextStyle(fontSize: 60.0, fontWeight: FontWeight.w600),
             textAlign: TextAlign.center,
           ),
-          const Text(
-            correct,
-            style: TextStyle(fontSize: 36.0, fontWeight: FontWeight.bold),
+          Text(
+            AppLocalizations.of(context).correct.capitalize(),
+            style: const TextStyle(fontSize: 36.0, fontWeight: FontWeight.bold),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 40.0),
           CustomButton(
-            title: newQuiz,
+            title: AppLocalizations.of(context).newQuiz.capitalize(),
             onTap: () async {
               ref.read(hiveServiceProvider).addTestData(state.correct.length);
               ref.read(animatedOpacityBoolProvider.state).state = false;

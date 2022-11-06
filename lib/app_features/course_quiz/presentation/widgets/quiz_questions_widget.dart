@@ -1,5 +1,7 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:school_soft_project/extensions/string_extension.dart';
 
 import '../../constants/animated_opacity_constants.dart';
 import '../../constants/language_constants.dart';
@@ -36,7 +38,7 @@ class QuizQuestions extends ConsumerWidget {
             children: [
               const SizedBox(height: 30),
               Text(
-                '$questionHeading ${index + 1} $ofHeading ${questions.length}',
+                '${AppLocalizations.of(context).questionHeading.capitalize()} ${index + 1} ${AppLocalizations.of(context).ofHeading} ${questions.length}',
                 style: const TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
               ),
               Padding(

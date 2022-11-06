@@ -1,3 +1,41 @@
 {
-    "language": "Svenska"
+    "language": "Svenska",
+    "common": "vanliga",
+    "dark_mode": "Växla till mörkt läge",
+    "high_contrast_mode": "Växla till högkontrastläge",
+    "language_name": "språk",
+
+    "account": "konto",
+    "display_name": "visningsname",
+    "sign_out": "logga ut",
+
+    
+    "overview": "översikt",
+    "mini_quiz": "mini quiz",
+    "practice": "öva mera",
+    "settings": "installningar",
+
+    "practice_more": "öva mera på de frågor du svarat fel på...",
+    "correct_answer": "rätt svar är:",
+   
+   
+    "errorMessage": "någonting gick fel!",
+    "errorCheckInternetConnection": "snälla, kontrollera din internetförbindelse!",
+    "nextQuestion": "nästa fråga!",
+    "showResults": "visa resultatet",
+    "errorNoQuestions": "inga frågor hittade!",
+    "retry": "försök igen!",
+    "questionHeading": "fråga",
+    "ofHeading": "av",
+    "correct": "rätt svar",
+    "newQuiz": "ny quiz",
+
+    
+    "hi": "hej",
+    "you_have_completed": "Du har gjort",
+    "mini_quiz": "mini quiz",
+    "average_score": "Ditt medelvärde är",
+    "reset_progress": "Nollställ dina framsteg!"
+   
+   
 }

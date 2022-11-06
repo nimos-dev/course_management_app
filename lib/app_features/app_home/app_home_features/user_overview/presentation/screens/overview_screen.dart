@@ -1,8 +1,10 @@
 import 'dart:io';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:school_soft_project/extensions/string_extension.dart';
 import '../../../../../app_authentication/app_authentication_providers.dart';
 import '../../../../../../global_services/hive_services/hive_service.dart';
 
@@ -59,16 +61,17 @@ class _OverviewScreenState extends ConsumerState<OverviewScreen> {
               // ---------------->
               const SizedBox(height: 12),
 
-              Text('Hi, ${ref.watch(hiveServiceProvider).getUserName()}'),
-              const SizedBox(height: 12),
-              Text('You have completed ${ref.watch(hiveServiceProvider).readTestDataNumberof()} Mini Quiz!'),
+              Text('${AppLocalizations.of(context).hi.capitalize()}, ${ref.watch(hiveServiceProvider).getUserName()}'),
               const SizedBox(height: 12),
               Text(
-                  'Your average scores is ${ref.watch(hiveServiceProvider).readTestDataAverageScore().toStringAsFixed(2)} !'),
+                  '${AppLocalizations.of(context).you_have_completed.capitalize()} ${ref.watch(hiveServiceProvider).readTestDataNumberof()} ${AppLocalizations.of(context).mini_quiz.capitalize()}'),
+              const SizedBox(height: 12),
+              Text(
+                  '${AppLocalizations.of(context).average_score.capitalize()} ${ref.watch(hiveServiceProvider).readTestDataAverageScore().toStringAsFixed(2)}'),
               const SizedBox(height: 12),
               TextButton(
                 onPressed: () => ref.read(hiveServiceProvider).deleteTestData(),
-                child: const Text('Reset my progress!'),
+                child: Text(AppLocalizations.of(context).reset_progress.capitalize()),
               ),
             ],
           );

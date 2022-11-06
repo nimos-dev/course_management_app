@@ -57,7 +57,7 @@ class _MySchoolAppState extends ConsumerState<MySchoolApp> {
         GlobalWidgetsLocalizations.delegate,
       ],
       debugShowCheckedModeBanner: false,
-      title: 'School Quiz Project',
+      title: 'Nano Quiz',
       themeMode: appThemeState.isDarkModeEnabled ?? true ? ThemeMode.dark : ThemeMode.light,
       theme: appThemeState.isHighContrastEnabled ?? false ? highContrastlightTheme() : lightTheme(),
       highContrastTheme: highContrastlightTheme(),

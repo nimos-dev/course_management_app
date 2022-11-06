@@ -1,7 +1,9 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:school_soft_project/app_features/app_authentication/app_authentication_providers.dart';
+import 'package:school_soft_project/extensions/string_extension.dart';
 
 import '../../../../../../global_services/firebase_services/Firestore_service.dart';
 import '../../../../../app_settings/app_settings_features/app_theme/app_theme_state.dart';
@@ -31,9 +33,9 @@ class CoursesScreen extends ConsumerWidget {
 
         return Column(
           children: [
-            const Padding(
-              padding: EdgeInsets.fromLTRB(0, 16, 0, 16),
-              child: Text('Practice the questions you answered incorrectly...'),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0, 16, 0, 16),
+              child: Text(AppLocalizations.of(context).practice_more.capitalize()),
             ),
             Expanded(
               child: ListView(
@@ -75,9 +77,9 @@ class CoursesScreen extends ConsumerWidget {
                               text: TextSpan(
                                 style: Theme.of(context).textTheme.bodyText2,
                                 children: <TextSpan>[
-                                  const TextSpan(
-                                    text: 'The correct answer is:',
-                                    style: TextStyle(color: Colors.black54),
+                                  TextSpan(
+                                    text: AppLocalizations.of(context).correct_answer.capitalize(),
+                                    style: const TextStyle(color: Colors.black54),
                                   ),
                                   TextSpan(
                                     text: ' ${stripHtml(data['Answer'])}',

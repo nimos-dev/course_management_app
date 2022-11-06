@@ -1,7 +1,8 @@
 // course_quiz_screen.dart
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:school_soft_project/extensions/string_extension.dart';
 
 import '../../constants/animated_opacity_constants.dart';
 import '../../constants/language_constants.dart';
@@ -44,7 +45,9 @@ class _CourseQuizScreenState extends ConsumerState<CourseQuizScreen> {
           return _buildBody(context, _pageController, questions);
         },
         loading: () => const Center(child: CircularProgressIndicator()),
-        error: (error, _) => const QuizError(message: errorMessage),
+        error: (error, _) => QuizError(
+          message: AppLocalizations.of(context).errorMessage.capitalize(),
+        ),
       ),
 
       //----->
@@ -57,7 +60,9 @@ class _CourseQuizScreenState extends ConsumerState<CourseQuizScreen> {
             duration: const Duration(milliseconds: animationDuration),
             opacity: ref.watch(animatedOpacityBoolProvider) ? 1.0 : 0.0,
             child: CustomButton(
-              title: (_pageController.page?.toInt() ?? 0) + 1 < questions.length ? nextQuestion : showResults,
+              title: (_pageController.page?.toInt() ?? 0) + 1 < questions.length
+                  ? AppLocalizations.of(context).nextQuestion.capitalize()
+                  : AppLocalizations.of(context).showResults.capitalize(),
               onTap: () async {
                 ref.read(animatedOpacityBoolProvider.state).state = false;
                 await Future.delayed(const Duration(milliseconds: animationDuration));
@@ -84,7 +89,7 @@ class _CourseQuizScreenState extends ConsumerState<CourseQuizScreen> {
 
   Widget _buildBody(BuildContext context, PageController pageController, List<CourseQuizQuestionModel> questions) {
     //
-    if (questions.isEmpty) return const QuizError(message: errorNoquestions);
+    if (questions.isEmpty) return QuizError(message: AppLocalizations.of(context).errorNoQuestions.capitalize());
 
     final quizState = ref.watch(quizControllerProvider);
 

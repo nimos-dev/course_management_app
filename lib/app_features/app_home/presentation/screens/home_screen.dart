@@ -1,6 +1,8 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
+import 'package:school_soft_project/extensions/string_extension.dart';
 
 import '../../../app_settings/presentation/screens/settings_screen.dart';
 import '../../../course_quiz/presentation/screens/course_quiz_screen.dart';
@@ -65,11 +67,23 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Overview'),
-          BottomNavigationBarItem(icon: Icon(Icons.quiz), label: 'Mini quiz'),
-          BottomNavigationBarItem(icon: Icon(Icons.book), label: 'Practice'),
-          BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'settings'),
+        items: [
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.home),
+            label: AppLocalizations.of(context).overview.capitalize(),
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.quiz),
+            label: AppLocalizations.of(context).mini_quiz.capitalize(),
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.book),
+            label: AppLocalizations.of(context).practice.capitalize(),
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.settings),
+            label: AppLocalizations.of(context).settings.capitalize(),
+          ),
         ],
         type: BottomNavigationBarType.fixed,
         currentIndex: _selectedIndex,

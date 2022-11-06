@@ -1,7 +1,8 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:school_soft_project/extensions/string_extension.dart';
 
-import '../../constants/language_constants.dart';
 import '../../course_quiz_providers.dart';
 import 'custom_button_widget.dart';
 
@@ -21,7 +22,8 @@ class QuizError extends ConsumerWidget {
         children: [
           Text(message, style: const TextStyle(color: Colors.white, fontSize: 20.0)),
           const SizedBox(height: 10.0),
-          CustomButton(title: retry, onTap: () => ref.refresh(quizRepositoryProvider)),
+          CustomButton(
+              title: AppLocalizations.of(context).retry.capitalize(), onTap: () => ref.refresh(quizRepositoryProvider)),
         ],
       ),
     );

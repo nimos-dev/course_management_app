@@ -4,7 +4,7 @@ import 'package:school_soft_project/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 
 class L10nState extends ChangeNotifier {
-  Locale _locale = Locale(Platform.localeName.substring(0, 2)); // TODO: Load/Save in HIVE...
+  Locale _locale = Locale(Platform.localeName.substring(0, 2));
 
   Locale get locale {
     return _locale;

@@ -2,5 +2,120 @@
     "language": "english",
     "@language":{
         "description": "The current language"
+    },
+    "common": "common",
+    "@language":{
+        "description": "Header for common settings"
+    },
+    "dark_mode": "enable dark mode",
+    "@language":{
+        "description": "Enable dark mode"
+    },
+    "high_contrast_mode": "enable high contrast mode",
+    "@language":{
+        "description": "Enable high contrast mode"
+    },
+    "language_name": "language",
+    "@language":{
+        "description": "language name"
+    },
+    "account": "account",
+    "@language":{
+        "description": "Header for account settings"
+    },
+    "display_name": "display name",
+    "@language":{
+        "description": "Display name"
+    },
+    "sign_out": "sign out",
+    "@language":{
+        "description": "Sign out"
+    },
+    "overview": "overview",
+    "@language":{
+        "description": "overview"
+    },
+    "mini_quiz": "mini quiz",
+    "@language":{
+        "description": "Mini quiz"
+    },
+    "practice": "practice",
+    "@language":{
+        "description": "Practice"
+    },
+    "settings": "settings",
+    "@language":{
+        "description": "Settings"
+    },
+    "practice_more": "practice the questions you answered incorrectly...",
+    "@language":{
+        "description": "Practice_more..."
+    },
+    "correct_answer": "the correct answer is:",
+    "@language":{
+        "description": "the correct answer is"
+    },
+
+
+    "errorMessage": "Something went wrong!",
+    "@language":{
+        "description": "Error message"
+    },
+    "errorCheckInternetConnection": "Please check your internet connection!",
+    "@language":{
+        "description": "Error message check internet connection"
+    },
+    "nextQuestion": "Next Question!",
+    "@language":{
+        "description": "Next question"
+    },
+    "showResults": "Show Results",
+    "@language":{
+        "description": "Show results"
+    },
+    "errorNoQuestions": "No questions found!",
+    "@language":{
+        "description": "error No Questions found"
+    },
+    "retry": "retry",
+    "@language":{
+        "description": "retry"
+    },
+    "questionHeading": "Question",
+    "@language":{
+        "description": "Question heading"
+    },
+    "ofHeading": "of",
+    "@language":{
+        "description": "Of heading"
+    },
+    "correct": "correct answers",
+    "@language":{
+        "description": "Correct answers"
+    },
+    "newQuiz": "new quiz",
+    "@language":{
+        "description": "New quiz"
+    },
+    "hi": "hi",
+    "@language":{
+        "description": "Hi"
+    },
+    "you_have_completed": "You have completed",
+    "@language":{
+        "description": "You have completed"
+    },
+    "mini_quiz": "Mini Quiz",
+    "@language":{
+        "description": "Mini quiz"
+    },
+    "average_score": "Your average score is",
+    "@language":{
+        "description": "Your average score is"
+    },
+    "reset_progress": "Reset my progress!",
+    "@language":{
+        "description": "Reset my progress"
     }
 }
+  

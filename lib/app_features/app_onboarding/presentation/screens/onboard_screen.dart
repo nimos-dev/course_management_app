@@ -22,15 +22,15 @@ class OnboardScreen extends ConsumerWidget {
             children: const [
               Padding(
                 padding: EdgeInsets.all(4.0),
-                child: Text('1: Test your knowledge by taking a nano-quiz !'),
+                child: Text('1: Test your knowledge by taking a nano-quiz'),
               ),
               Padding(
                 padding: EdgeInsets.all(4.0),
-                child: Text('2: Repeat the subjects you didn\'t know the answers to !'),
+                child: Text('2: Repeat the subjects you didn\'t know the answers to'),
               ),
               Padding(
                 padding: EdgeInsets.all(4.0),
-                child: Text('3: Try again to see if you understood everything !'),
+                child: Text('3: Try again to see if you understood everything'),
               ),
             ],
           ),
